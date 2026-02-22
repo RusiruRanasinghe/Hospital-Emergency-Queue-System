@@ -79,5 +79,23 @@ public class MainFX extends Application {
                 showError("Invalid input", "Please enter valid numbers for age/vitals.");
             }
         });
+
+         // ---- Queue table ----
+        setupTable();
+
+        Button refreshBtn = new Button("Refresh Queue");
+        refreshBtn.setOnAction(e -> refreshTable());
+
+        Button treatBtn = new Button("Treat Next");
+        treatBtn.setOnAction(e -> {
+            Patient p = system.treatNextPatient();
+            if (p == null) {
+                nextPatientLabel.setText("Next patient: - (queue empty)");
+            } else {
+                nextPatientLabel.setText("Next patient: " + p.getPatientId() + " - " + p.getName()
+                        + " | Doctor: " + (p.getAssignedDoctorId() == null ? "None" : p.getAssignedDoctorId()));
+            }
+            refreshTable();
+        });
     }
 }
