@@ -36,5 +36,11 @@ public class MainFX extends Application {
         TextField emergencyField = new TextField();
         ComboBox<Integer> triageBox = new ComboBox<>(FXCollections.observableArrayList(1,2,3,4,5));
         triageBox.setValue(3);
+
+        TextField bpSysField = new TextField();
+        TextField bpDiaField = new TextField();
+        TextField hrField = new TextField();
+        TextField tempField = new TextField();
+        TextField spo2Field = new TextField();
     }
 }
