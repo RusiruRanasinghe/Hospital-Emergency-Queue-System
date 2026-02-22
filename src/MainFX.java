@@ -335,4 +335,8 @@ public class MainFX extends Application {
         a.setContentText(msg);
         a.showAndWait();
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
