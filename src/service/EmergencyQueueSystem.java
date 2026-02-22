@@ -44,4 +44,19 @@ public class EmergencyQueueSystem {
         Doctor doctor = new Doctor(id, name);
         doctorHeap.insert(doctor);
     }
+
+    public Patient registerPatient(String name, int age, String emergencyType, int triageLevel,
+                                   int bpSys, int bpDia, int heartRate, double temperature, int spo2) {
+        int id = IdGenerator.nextPatientId();
+        long arrivalOrder = IdGenerator.nextArrivalOrder();
+        LocalDateTime now = LocalDateTime.now();
+
+        Patient p = new Patient(id, name, age, emergencyType, triageLevel, now, arrivalOrder,
+                bpSys, bpDia, heartRate, temperature, spo2);
+
+        // compute + store score
+        p.setPriorityScore(engine.computePriorityScore(p, now));
+        heap.insert(p);
+        return p;
+    }
 }
