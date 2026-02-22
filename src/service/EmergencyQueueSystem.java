@@ -39,4 +39,9 @@ public class EmergencyQueueSystem {
             4, 10,
             5, 7
     );
+
+    public void addDoctor(int id, String name) {
+        Doctor doctor = new Doctor(id, name);
+        doctorHeap.insert(doctor);
+    }
 }
