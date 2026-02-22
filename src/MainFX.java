@@ -42,5 +42,14 @@ public class MainFX extends Application {
         TextField hrField = new TextField();
         TextField tempField = new TextField();
         TextField spo2Field = new TextField();
+
+        nameField.setPromptText("Name");
+        ageField.setPromptText("Age");
+        emergencyField.setPromptText("Emergency Type");
+        bpSysField.setPromptText("BP Sys");
+        bpDiaField.setPromptText("BP Dia");
+        hrField.setPromptText("Heart Rate");
+        tempField.setPromptText("Temp");
+        spo2Field.setPromptText("SpO2");
     }
 }
