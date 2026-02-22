@@ -1,0 +1,10 @@
+package engine;
+
+import model.Patient;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
+public class PriorityEngine {
+        
+}
