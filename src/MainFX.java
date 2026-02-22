@@ -129,5 +129,21 @@ public class MainFX extends Application {
                 showError("Invalid input", "Enter a valid patient ID / values.");
             }
         });
+
+        // ---- Estimated wait time ----
+        TextField waitId = new TextField();
+        waitId.setPromptText("Patient ID");
+        Button waitBtn = new Button("Calculate Wait");
+        waitBtn.setOnAction(e -> {
+            try {
+                int id = Integer.parseInt(waitId.getText().trim());
+                double mins = system.estimatedWaitMinutes(id);
+                waitLabel.setText("Estimated wait: " + String.format("%.1f", mins) + " minutes");
+            } catch (Exception ex) {
+                showError("Invalid input", "Enter a valid patient ID.");
+            }
+        });
+
+        
     }
 }
