@@ -159,5 +159,18 @@ public class MainFX extends Application {
         form.add(new Label("HR"), 0,3); form.add(hrField, 1,3);
         form.add(new Label("Temp"), 2,3); form.add(tempField, 3,3);
         form.add(new Label("SpO2"), 0,4); form.add(spo2Field, 1,4);
+
+        HBox formButtons = new HBox(10, registerBtn);
+        VBox topBox = new VBox(8, new Label("Patient Registration"), form, formButtons, alertLabel);
+        topBox.setPadding(new Insets(10));
+
+        Button historyBtn = new Button("Show Treatment History");
+
+        historyBtn.setOnAction(e -> showTreatmentHistory());
+
+        Button doctorLoadBtn = new Button("Show Doctor Loads");
+        doctorLoadBtn.setOnAction(e -> showDoctorLoads());
+
+        HBox queueButtons = new HBox(10, refreshBtn, treatBtn, doctorLoadBtn);
     }
 }
