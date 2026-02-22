@@ -25,9 +25,16 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage stage){
-        
+
         // Add doctors
         system.addDoctor(1, "Dr. Silva");
         system.addDoctor(2, "Dr. Perera");
+
+        //input
+        TextField nameField = new TextField();
+        TextField ageField = new TextField();
+        TextField emergencyField = new TextField();
+        ComboBox<Integer> triageBox = new ComboBox<>(FXCollections.observableArrayList(1,2,3,4,5));
+        triageBox.setValue(3);
     }
 }
