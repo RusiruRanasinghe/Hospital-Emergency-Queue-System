@@ -51,5 +51,33 @@ public class MainFX extends Application {
         hrField.setPromptText("Heart Rate");
         tempField.setPromptText("Temp");
         spo2Field.setPromptText("SpO2");
+
+        Button registerBtn = new Button("Register Patient");
+        registerBtn.setOnAction(e -> {
+            alertLabel.setText("");
+            try {
+                Patient p = system.registerPatient(
+                        nameField.getText().trim(),
+                        Integer.parseInt(ageField.getText().trim()),
+                        emergencyField.getText().trim(),
+                        triageBox.getValue(),
+                        Integer.parseInt(bpSysField.getText().trim()),
+                        Integer.parseInt(bpDiaField.getText().trim()),
+                        Integer.parseInt(hrField.getText().trim()),
+                        Double.parseDouble(tempField.getText().trim()),
+                        Integer.parseInt(spo2Field.getText().trim())
+                );
+
+                if (p.getPriorityScore() >= 1000) {
+                    alertLabel.setText("⚠ CRITICAL ALERT: Emergency override applied!");
+                }
+
+                refreshTable();
+                clearFields(nameField, ageField, emergencyField, bpSysField, bpDiaField, hrField, tempField, spo2Field);
+
+            } catch (Exception ex) {
+                showError("Invalid input", "Please enter valid numbers for age/vitals.");
+            }
+        });
     }
 }
