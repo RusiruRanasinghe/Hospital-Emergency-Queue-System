@@ -22,4 +22,12 @@ public class MainFX extends Application {
     private final Label nextPatientLabel = new Label("Next patient: -");
     private final Label alertLabel = new Label("");
     private final Label waitLabel = new Label("Estimated wait: -");
+
+    @Override
+    public void start(Stage stage){
+        
+        // Add doctors
+        system.addDoctor(1, "Dr. Silva");
+        system.addDoctor(2, "Dr. Perera");
+    }
 }
