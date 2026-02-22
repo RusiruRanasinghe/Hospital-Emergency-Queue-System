@@ -236,4 +236,57 @@ public class MainFX extends Application {
         doctorStage.setScene(new Scene(root, 500, 350));
         doctorStage.show();
     }
+
+    private void showTreatmentHistory() {
+
+        List<Patient> history = system.getTreatmentHistory();
+
+        if (history.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Treatment History");
+            alert.setHeaderText(null);
+            alert.setContentText("No treated patients yet.");
+            alert.showAndWait();
+            return;
+        }
+
+        TableView<Patient> historyTable = new TableView<>();
+        ObservableList<Patient> historyData = FXCollections.observableArrayList(history);
+
+        TableColumn<Patient, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(c ->
+                new SimpleStringProperty(String.valueOf(c.getValue().getPatientId())));
+
+        TableColumn<Patient, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getName()));
+
+        TableColumn<Patient, String> triageCol = new TableColumn<>("Triage");
+        triageCol.setCellValueFactory(c ->
+                new SimpleStringProperty(String.valueOf(c.getValue().getTriageLevel())));
+
+        TableColumn<Patient, String> statusCol = new TableColumn<>("Status");
+        statusCol.setCellValueFactory(c ->
+                new SimpleStringProperty(String.valueOf(c.getValue().getStatus())));
+
+        TableColumn<Patient, String> doctorCol = new TableColumn<>("Doctor");
+        doctorCol.setCellValueFactory(c ->
+                new SimpleStringProperty(
+                        c.getValue().getAssignedDoctorId() == null
+                                ? "-"
+                                : String.valueOf(c.getValue().getAssignedDoctorId())
+                ));
+
+        historyTable.getColumns().addAll(idCol, nameCol, triageCol, statusCol, doctorCol);
+        historyTable.setItems(historyData);
+        historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        VBox root = new VBox(10, new Label("Treatment History"), historyTable);
+        root.setPadding(new Insets(10));
+
+        Stage historyStage = new Stage();
+        historyStage.setTitle("Treatment History");
+        historyStage.setScene(new Scene(root, 700, 400));
+        historyStage.show();
+    }
 }
