@@ -172,5 +172,25 @@ public class MainFX extends Application {
         doctorLoadBtn.setOnAction(e -> showDoctorLoads());
 
         HBox queueButtons = new HBox(10, refreshBtn, treatBtn, doctorLoadBtn);
+        
+        
+        VBox queueBox = new VBox(10, new Label("Revised Emergency Queue (Sorted)"), table, queueButtons, nextPatientLabel);
+        queueBox.setPadding(new Insets(10));
+
+        HBox updateBox = new HBox(10, updateId, updateTriage, updateSpo2, updateHr, updateBtn);
+        updateBox.setPadding(new Insets(10));
+
+        HBox waitBox = new HBox(10, waitId, waitBtn, waitLabel);
+        waitBox.setPadding(new Insets(10));
+
+        VBox root = new VBox(10, topBox, queueBox, new Separator(), new Label("Re-triage / Update"), updateBox,
+                new Separator(), new Label("Estimated Waiting Time"), waitBox);
+
+        Scene scene = new Scene(root, 1050, 750);
+        stage.setTitle("Hospital Emergency Queue Management System (JavaFX)");
+        stage.setScene(scene);
+        stage.show();
+
+        refreshTable();
     }
 }
