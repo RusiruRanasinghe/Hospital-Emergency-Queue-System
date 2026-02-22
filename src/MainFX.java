@@ -318,4 +318,11 @@ public class MainFX extends Application {
         table.setItems(tableData);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
+
+    private void refreshTable() {
+        List<Patient> sorted = system.viewQueueSorted(); // uses heap logic
+        tableData.setAll(sorted);
+    }
+
+    
 }
