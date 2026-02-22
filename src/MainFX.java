@@ -327,4 +327,12 @@ public class MainFX extends Application {
     private void clearFields(TextField... fields) {
         for (TextField f : fields) f.clear();
     }
+
+    private void showError(String title, String msg) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle(title);
+        a.setHeaderText(null);
+        a.setContentText(msg);
+        a.showAndWait();
+    }
 }
