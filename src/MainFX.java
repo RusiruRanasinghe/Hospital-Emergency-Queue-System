@@ -324,5 +324,7 @@ public class MainFX extends Application {
         tableData.setAll(sorted);
     }
 
-    
+    private void clearFields(TextField... fields) {
+        for (TextField f : fields) f.clear();
+    }
 }
