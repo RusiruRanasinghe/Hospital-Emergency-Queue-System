@@ -12,6 +12,21 @@ public class PriorityEngine {
             return 1000.0;
         }
 
-        
+        double score = baseFromTriage(p.getTriageLevel());
+
+        // Vitals severity boosts
+        if (p.getSpo2() < 90) score += 25;
+        if (p.getHeartRate() > 130 || p.getHeartRate() < 45) score += 20;
+        if (p.getTemperature() > 39.0) score += 10;
+        if (p.getBpSys() < 90) score += 20;
+
+        // Age factor
+        if (p.getAge() < 12 || p.getAge() > 60) score += 10;
+
+        // Waiting time boost: +5 every 15 minutes
+        long minutes = Math.max(0, Duration.between(p.getArrivalTime(), now).toMinutes());
+        score += (minutes / 15) * 5;
+
+        return score;
     }
 }
