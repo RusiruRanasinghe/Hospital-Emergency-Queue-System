@@ -144,6 +144,20 @@ public class MainFX extends Application {
             }
         });
 
-        
+         // ---- Layout ----
+        GridPane form = new GridPane();
+        form.setHgap(10);
+        form.setVgap(10);
+
+        form.add(new Label("Name"), 0,0); form.add(nameField, 1,0);
+        form.add(new Label("Age"), 2,0); form.add(ageField, 3,0);
+        form.add(new Label("Emergency"), 0,1); form.add(emergencyField, 1,1);
+        form.add(new Label("Triage"), 2,1); form.add(triageBox, 3,1);
+
+        form.add(new Label("BP Sys"), 0,2); form.add(bpSysField, 1,2);
+        form.add(new Label("BP Dia"), 2,2); form.add(bpDiaField, 3,2);
+        form.add(new Label("HR"), 0,3); form.add(hrField, 1,3);
+        form.add(new Label("Temp"), 2,3); form.add(tempField, 3,3);
+        form.add(new Label("SpO2"), 0,4); form.add(spo2Field, 1,4);
     }
 }
