@@ -289,4 +289,33 @@ public class MainFX extends Application {
         historyStage.setScene(new Scene(root, 700, 400));
         historyStage.show();
     }
+
+    private void setupTable() {
+        TableColumn<Patient, String> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getPatientId())));
+
+        TableColumn<Patient, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getName()));
+
+        TableColumn<Patient, String> triageCol = new TableColumn<>("Triage");
+        triageCol.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getTriageLevel())));
+
+        TableColumn<Patient, String> scoreCol = new TableColumn<>("Score");
+        scoreCol.setCellValueFactory(c -> new SimpleStringProperty(String.format("%.2f", c.getValue().getPriorityScore())));
+
+        TableColumn<Patient, String> spo2Col = new TableColumn<>("SpO2");
+        spo2Col.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getSpo2())));
+
+        TableColumn<Patient, String> statusCol = new TableColumn<>("Status");
+        statusCol.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getStatus())));
+
+        TableColumn<Patient, String> docCol = new TableColumn<>("Doctor");
+        docCol.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getAssignedDoctorId() == null ? "-" : String.valueOf(c.getValue().getAssignedDoctorId()))
+        );
+
+        table.getColumns().setAll(idCol, nameCol, triageCol, scoreCol, spo2Col, statusCol, docCol);
+        table.setItems(tableData);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
 }
