@@ -30,4 +30,13 @@ public class EmergencyQueueSystem {
     public List<Patient> getLastNTreated(int n) {
         return treatedHistory.getLastN(n);
     }
+
+    // Avg treatment times (minutes) by triage level
+    private final Map<Integer, Integer> avgTime = Map.of(
+            1, 25,
+            2, 20,
+            3, 15,
+            4, 10,
+            5, 7
+    );
 }
