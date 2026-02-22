@@ -14,4 +14,12 @@ import java.util.List;
 
 
 public class MainFX extends Application {
+    private final EmergencyQueueSystem system = new EmergencyQueueSystem();
+
+    private final TableView<Patient> table = new TableView<>();
+    private final ObservableList<Patient> tableData = FXCollections.observableArrayList();
+
+    private final Label nextPatientLabel = new Label("Next patient: -");
+    private final Label alertLabel = new Label("");
+    private final Label waitLabel = new Label("Estimated wait: -");
 }
