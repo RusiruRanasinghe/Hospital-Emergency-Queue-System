@@ -193,4 +193,47 @@ public class MainFX extends Application {
 
         refreshTable();
     }
+
+    private void showDoctorLoads() {
+
+        List<Doctor> doctors = system.getAllDoctors();
+
+        if (doctors.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Doctor Loads");
+            alert.setHeaderText(null);
+            alert.setContentText("No doctors available.");
+            alert.showAndWait();
+            return;
+        }
+
+        TableView<Doctor> doctorTable = new TableView<>();
+        ObservableList<Doctor> doctorData = FXCollections.observableArrayList(doctors);
+
+        TableColumn<Doctor, String> idCol = new TableColumn<>("Doctor ID");
+        idCol.setCellValueFactory(c ->
+                new SimpleStringProperty(String.valueOf(c.getValue().getDoctorId())));
+
+        TableColumn<Doctor, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getName()));
+
+        TableColumn<Doctor, String> loadCol = new TableColumn<>("Current Load");
+        loadCol.setCellValueFactory(c ->
+                new SimpleStringProperty(String.valueOf(c.getValue().getCurrentLoad())));
+
+        doctorTable.getColumns().addAll(idCol, nameCol, loadCol);
+        doctorTable.setItems(doctorData);
+        doctorTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        VBox root = new VBox(10,
+                new Label("Doctor Load Balancing (Min Heap)"),
+                doctorTable);
+        root.setPadding(new Insets(10));
+
+        Stage doctorStage = new Stage();
+        doctorStage.setTitle("Doctor Load Dashboard");
+        doctorStage.setScene(new Scene(root, 500, 350));
+        doctorStage.show();
+    }
 }
