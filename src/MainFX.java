@@ -97,5 +97,37 @@ public class MainFX extends Application {
             }
             refreshTable();
         });
+
+        // ---- Update / Re-triage ----
+        TextField updateId = new TextField();
+        updateId.setPromptText("Patient ID");
+
+        ComboBox<Integer> updateTriage = new ComboBox<>(FXCollections.observableArrayList(1,2,3,4,5));
+        updateTriage.setPromptText("Triage");
+
+        TextField updateSpo2 = new TextField();
+        updateSpo2.setPromptText("SpO2");
+
+        TextField updateHr = new TextField();
+        updateHr.setPromptText("HR");
+
+        Button updateBtn = new Button("Update Priority (Re-triage)");
+        updateBtn.setOnAction(e -> {
+            try {
+                int id = Integer.parseInt(updateId.getText().trim());
+
+                Integer triage = (updateTriage.getValue() == null) ? null : updateTriage.getValue();
+                Integer spo2 = updateSpo2.getText().isBlank() ? null : Integer.parseInt(updateSpo2.getText().trim());
+                Integer hr = updateHr.getText().isBlank() ? null : Integer.parseInt(updateHr.getText().trim());
+
+                // keep others null (no change)
+                boolean ok = system.updatePatient(id, triage, null, null, hr, null, spo2);
+                if (!ok) showError("Not found", "Patient ID not found in queue.");
+                refreshTable();
+
+            } catch (Exception ex) {
+                showError("Invalid input", "Enter a valid patient ID / values.");
+            }
+        });
     }
 }
