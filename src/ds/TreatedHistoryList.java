@@ -40,13 +40,50 @@ public class TreatedHistoryList {
     }
 
     //remove last patient
-    
+    public Patient removeLast(){
+        if (tail == null) return null;
+
+        Patient remove = tail.patient;
+
+        if(head == tail){
+            head = tail = null;
+        }else {
+            tail = tail.prev;
+            tail.next = null;
+        }
+
+        size--;
+        return remove;
+    }
 
     //traverse forward
-    
+    public List<Patient> getAllHistory() {
+
+        List<Patient> list = new ArrayList<>();
+        Node current = head;
+
+        while(current != null){
+            list.add(current.patient);
+            current = current.next;
+        }
+
+        return list;
+    }
 
     //get last patients
-    
+    public List<Patient> getLastN(int n){
+        List<Patient> list = new ArrayList<>();
+        Node current = tail;
+        int count = 0;
+
+        while(current != null && count < n){
+            list.add(current.patient);
+            current = current.prev;
+            count++;
+        }
+
+        return list;
+    }
 
     public int size(){
         return size;
